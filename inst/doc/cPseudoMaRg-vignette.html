@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Using cPseudoMaRg</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Using cPseudoMaRg</h1>
+
+
+
+<div id="what-does-this-package-provide" class="section level2">
+<h2>What Does This Package Provide?</h2>
+<p>This package provides the boilerplate code for the Correlated Pseudo-Marginal method of <span class="citation">(Deligiannidis, Doucet, and Pitt 2015)</span>. This vignette demonstrates its use by providing two examples that are closely related to ones given in their paper.</p>
+</div>
+<div id="a-background-in-markov-chain-monte-carlo" class="section level2">
+<h2>A Background in Markov-chain Monte Carlo</h2>
+<p>Assume that you are a Bayesian and have some data <span class="math inline">\(y\)</span>, and that you would like to perform inference for a collection of parameters <span class="math inline">\(\theta\)</span>. After specifying a likelihood <span class="math inline">\(p(y \mid \theta)\)</span> and a prior <span class="math inline">\(p(\theta)\)</span>, you are interested in sampling from the posterior <span class="math inline">\(p(\theta \mid y)\)</span> using a Markov chain Monte Carlo (MCMC) algorithm. Such an algorithm will draw correlated samples <span class="math inline">\(\theta^1, \theta^2, \ldots, \theta^{N_{S}}\)</span> from a Markov chain, and under suitable regularity conditions, the average of your large collection of samples will approximate posterior expectations such as the posterior mean: <span class="math inline">\(E[\theta \mid y]\)</span>.</p>
+<p>This package implements Metropolis-Hastings (MH) type algorithms, which is a specific sub-class of MCMC methods. MH algorithms moves from iteration to iteration by following a two-step procedure. Step one starts with <em>proposing</em> a new value in the chain. Step two makes a decision on whether or not to <em>accept</em> this new proposal. In the event that the sample is rejected, the chain stays in the same place. other MCMC methods, such as Gibbs sampling, produce samples that cannot stay in the same place.</p>
+<p>This software is more specifically tailored to an implementation of the Correlated Pseudo-Marginal sampler (CPM). CPM is an extension of the Pseudo-Marginal Metropolis-Hastings algorithm (PMMH) <span class="citation">(Andrieu and Roberts 2009)</span>, which is itself an extension of the Metropolis-Hastings (MH) algorithm. CPM and PMMH are useful for sampling from the posterior of a model with an <em>intractable likelihood.</em> While the original MH algorithm requires the ability to evaluate the model’s likelihood, CPM and PMMH only requires unbiased approximations of it.</p>
+</div>
+<div id="the-makecpmsampler-function" class="section level2">
+<h2>The <code>makeCPMSampler()</code> Function</h2>
+<p>This package provides a function <code>makeCPMSampler()</code> that implements all three of these algorithms (although it is more suited for PMMH and CPM algorithms). It abstracts away many implementation details, so, mathematically speaking, only a small degree of familiarity with the algorithms is required to use this software.</p>
+<p>Programmatically speaking, <code>makeCPMSampler()</code> is a <em>function factory</em>. This means that it is a function that creates and returns another function. The returned function will be the function that generates parameter samples.</p>
+<p>Furthermore, many of <code>makeCPMSampler()</code>’s required inputs are functions, as well. Here is a description of all the inputs it takes.</p>
+<ul>
+<li><p>Any MH algorithm (e.g. MH, PMMH, CPM) requires that you are able to sample from a proposal distribution, and to evaluate its density. You provide it these to <code>makeCPMSampler()</code> in the first two inputs: <code>paramKernSamp=</code> and <code>logParamKernEval=</code>.</p></li>
+<li><p>You will need to provide a function that evaluates the <em>logarithm</em> of the prior distribution. This is the third argument: <code>logPriorEval</code>.</p></li>
+<li><p>Unlike the standard Metropolis-Hastings algorithm, you will not be required to provide a function that evaluates the logarithm of the likelihood. Recall from earlier that PMMH and CPM only require an unbiased estimate of the likelihood. The logarithm of an unbiased approximation is provided as the fourth argument: <code>logLikeApproxEval=</code>. If you’d like, you may provide for this argument a function giving <em>exact</em> evaluations. In this case, <code>makeCPMSampler()</code> will return a standard MH sampler. This can be useful, for instance, if you are comparing the relative efficiency of pseudo-marginal and non-pseudo-marginal methods.</p></li>
+<li><p>Finally, you must provide the non-functional inputs. <code>yData</code> is the entire data set of observations. <code>numU</code> is the number of standard univariate normal samples that are used for each approximate log-likelihood evaluation. <code>numIters</code> is the total number of samples drawn. This does not count burn-in or thinning. <code>rho</code> is the correlation between standard normal variates at each MCMC iteration. Finally, change <code>storeEvery</code> to some integer greater than <span class="math inline">\(1\)</span> if you are concerned about memory on your computer, and you’d like to use thinning. If you set it to <span class="math inline">\(2\)</span>, say, then every other sample will be retained.</p></li>
+</ul>
+</div>
+<div id="a-first-example" class="section level2">
+<h2>A First Example</h2>
+<p>The first example is the same as the provided in this package’s documentation. This section breaks up the code into chunks in order to explain it more easily. The model has two parameters: <span class="math inline">\(\theta = (\theta_1, \theta_2)\)</span>. The conditional likelihood is</p>
+<p><span class="math display">\[
+\begin{eqnarray} 
+p(y_{1:N} \mid x_{1:N}, \theta) = \prod_{i=1}^N p(y_{i} \mid x_{i}, \theta)  \tag{1}
+\end{eqnarray}
+\]</span></p>
+<p>where <span class="math display">\[
+\begin{eqnarray} 
+y_{i} \mid x_{i}, \theta \sim \text{Normal}(x_i, \theta_1 - \theta_2)
+\end{eqnarray}
+\]</span> for <span class="math inline">\(i=1,\ldots,N\)</span>. Here <span class="math inline">\(x_1, \ldots, x_N := x_{1:N}\)</span> is a collection of latent/hidden/unobserved random variables. They have the following distribution:</p>
+<p><span class="math display">\[
+\begin{eqnarray} 
+p(x_{1:N} \mid \theta) = \prod_{i=1}^N p( x_{i} \mid \theta) \tag{2}
+\end{eqnarray}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\begin{eqnarray} 
+x_{i} \mid  \theta \sim \text{Normal}(x_i, \theta_2)
+\end{eqnarray}
+\]</span></p>
+<p>for <span class="math inline">\(i=1,\ldots,N\)</span>.</p>
+<p>We can simulate <span class="math inline">\(N=10\)</span> observations from the model with the following code.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>realTheta1 <span class="ot">&lt;-</span> .<span class="dv">2</span> <span class="sc">+</span> .<span class="dv">3</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>realTheta2 <span class="ot">&lt;-</span> .<span class="dv">2</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>realParams <span class="ot">&lt;-</span> <span class="fu">c</span>(realTheta1, realTheta2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>numObs <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>realX <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(numObs, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(realTheta2))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>realY <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(numObs, <span class="at">mean =</span> realX, <span class="at">sd =</span> <span class="fu">sqrt</span>(realTheta1 <span class="sc">-</span> realTheta2))</span></code></pre></div>
+<p>Next, construct the sampler function <code>sampler</code> using <code>makeCPMSampler()</code>. We assume a uniform prior over the region <span class="math inline">\(50 &gt; \theta_1 &gt; \theta_2 &gt; 0\)</span>. A simple multivariate normal is used for the proposal distribution.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cPseudoMaRg)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>numImportanceSamps <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>numMCMCIters <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>randomWalkScale <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>recordEveryTh <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create the function that performs sampling</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>sampler <span class="ot">&lt;-</span> <span class="fu">makeCPMSampler</span>(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">paramKernSamp =</span> <span class="cf">function</span>(params){</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    params <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">2</span>)<span class="sc">*</span>randomWalkScale</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">logParamKernEval =</span> <span class="cf">function</span>(oldTheta, newTheta){</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dnorm</span>(newTheta[<span class="dv">1</span>], oldTheta[<span class="dv">1</span>], <span class="at">sd =</span> randomWalkScale, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="sc">+</span> <span class="fu">dnorm</span>(newTheta[<span class="dv">2</span>], oldTheta[<span class="dv">2</span>], <span class="at">sd =</span> randomWalkScale, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">logPriorEval =</span> <span class="cf">function</span>(theta){</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>( (<span class="dv">50</span> <span class="sc">&gt;</span> theta[<span class="dv">1</span>]) <span class="sc">&amp;</span> (theta[<span class="dv">1</span>] <span class="sc">&gt;</span> theta[<span class="dv">2</span>]) <span class="sc">&amp;</span> (theta[<span class="dv">2</span>] <span class="sc">&gt;</span> <span class="dv">0</span>) ){</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="fl">7.130899</span> <span class="co"># - log of 50^2/2</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">logLikeApproxEval =</span> <span class="cf">function</span>(y, thetaProposal, uProposal){</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(  (<span class="dv">50</span> <span class="sc">&gt;</span> thetaProposal[<span class="dv">1</span>]) <span class="sc">&amp;</span> (thetaProposal[<span class="dv">1</span>] <span class="sc">&gt;</span> thetaProposal[<span class="dv">2</span>]) <span class="sc">&amp;</span> (thetaProposal[<span class="dv">2</span>] <span class="sc">&gt;</span> <span class="dv">0</span>)  ){</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>      xSamps <span class="ot">&lt;-</span> uProposal<span class="sc">*</span><span class="fu">sqrt</span>(thetaProposal[<span class="dv">2</span>])</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>      logCondLikes <span class="ot">&lt;-</span> <span class="fu">sapply</span>(xSamps,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                             <span class="cf">function</span>(xsamp) {</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">sum</span>(<span class="fu">dnorm</span>(y,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                                         xsamp, </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                                         <span class="fu">sqrt</span>(thetaProposal[<span class="dv">1</span>] <span class="sc">-</span> thetaProposal[<span class="dv">2</span>]),</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">log =</span> <span class="cn">TRUE</span>)) })</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>      m <span class="ot">&lt;-</span> <span class="fu">max</span>(logCondLikes)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">log</span>(<span class="fu">sum</span>(<span class="fu">exp</span>(logCondLikes <span class="sc">-</span> m))) <span class="sc">+</span> m <span class="sc">-</span> <span class="fu">log</span>(<span class="fu">length</span>(y))</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  realY, </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  numImportanceSamps, </span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  numMCMCIters, </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  .<span class="dv">99</span>, <span class="co"># change to 0 for original pseudo-marginal method</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  recordEveryTh)</span></code></pre></div>
+<p>The approximate log-likelihood, provided to the <code>logLikeApproxEval=</code> parameter, uses importance sampling: <span class="math display">\[
+\begin{align*} 
+\log \hat{p}(y_{1:N} \mid  \theta) 
+&amp;= \log \left\{ 
+N_X^{-1} \sum_{i=1}^{N_X} \frac{p(y_{1:N} \mid X^i_{1:N}, \theta) p(X^i_{1:N} \mid \theta)}{q(X^i_{1:N} \mid y_{1:N}, \theta)}
+\right\}
+\end{align*}
+\]</span> where <span class="math inline">\(X^1_{1:N}, \ldots, X^{N_X}_{1:N} \overset{\text{iid}}{\sim} q( \cdot \mid y_{1:N}, \theta)\)</span>.</p>
+<p>Unlike many importance sampling implementations that call pseudo-random number generating functions (e.g. <code>rnorm</code>) directly, this calculates the approximation based on standard normal samples generated from within <code>makeCPMSampler()</code>. We choose <span class="math inline">\(q(x_{1:N} \mid y_{1:N}, \theta) = p(x_{1:N} \mid \theta)\)</span>, despite it not being the optimal proposal/instrumental distribution. Note the use of the “log-sum-exp” trick to avoid numerical underflow.</p>
+<p>Finally, sample the Markov chain. Call the samples <code>res</code>, and examine them.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">sampler</span>(realParams)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(res)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CPM Results: at a glance...</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1000  iterations performed</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1000  samples retained</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  posterior means (in the supplied parameterization):  1.772459 1.357395 </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  acceptance rate:  0.076</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" width="80%" /></p>
+<p>You might have noticed that this particular model has a tractable likelihood, so it is more efficient to use regular MH. The likelihood is equal to the following</p>
+<p><span class="math display">\[
+\begin{align*} 
+p(y_{1:N} \mid  \theta) 
+&amp;= \int p(y_{1:N} \mid x_{1:N}, \theta) p(x_{1:N} \mid \theta) \text{d}x_{1:N} \\
+&amp;= \prod_{i=1}^N \text{Normal}(y_i ; 0, \theta_1)
+\end{align*}
+\]</span></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>samplerExact <span class="ot">&lt;-</span> <span class="fu">makeCPMSampler</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">paramKernSamp =</span> <span class="cf">function</span>(params){</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(params <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">2</span>)<span class="sc">*</span>randomWalkScale)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">logParamKernEval =</span> <span class="cf">function</span>(oldTheta, newTheta){</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dnorm</span>(newTheta[<span class="dv">1</span>], oldTheta[<span class="dv">1</span>], <span class="at">sd =</span> randomWalkScale, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="sc">+</span> <span class="fu">dnorm</span>(newTheta[<span class="dv">2</span>], oldTheta[<span class="dv">2</span>], <span class="at">sd =</span> randomWalkScale, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">logPriorEval =</span> <span class="cf">function</span>(theta){</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>( (<span class="dv">50</span> <span class="sc">&gt;</span> theta[<span class="dv">1</span>]) <span class="sc">&amp;</span> (theta[<span class="dv">1</span>] <span class="sc">&gt;</span> theta[<span class="dv">2</span>]) <span class="sc">&amp;</span> (theta[<span class="dv">2</span>] <span class="sc">&gt;</span> <span class="dv">0</span>) ){</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="fl">7.130899</span> <span class="co"># - log of 50^2/2</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">logLikeApproxEval =</span> <span class="cf">function</span>(y, thetaProposal, uProposal){</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this is exact now!</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>( (<span class="dv">50</span> <span class="sc">&gt;</span> thetaProposal[<span class="dv">1</span>]) <span class="sc">&amp;</span> (thetaProposal[<span class="dv">1</span>] <span class="sc">&gt;</span> thetaProposal[<span class="dv">2</span>]) <span class="sc">&amp;</span> (thetaProposal[<span class="dv">2</span>] <span class="sc">&gt;</span> <span class="dv">0</span>) ){</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>(<span class="fu">dnorm</span>(y, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(thetaProposal[<span class="dv">1</span>]), <span class="at">log =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  realY, </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  numImportanceSamps, <span class="co"># doesn&#39;t this matter because Us are not used</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  numMCMCIters, </span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  .<span class="dv">99</span>, <span class="co"># doesn&#39;t this matter because Us are not used</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  recordEveryTh)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>res2 <span class="ot">&lt;-</span> <span class="fu">samplerExact</span>(realParams)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(res2)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CPM Results: at a glance...</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1000  iterations performed</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1000  samples retained</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  posterior means (in the supplied parameterization):  0.5457526 0.2342012 </span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  acceptance rate:  0.034</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res2)</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAC9FBMVEUAAAABAQECAgIDAwMEBAQFBQUGBgYHBwcICAgJCQkKCgoLCwsMDAwNDQ0ODg4PDw8QEBARERESEhITExMUFBQVFRUWFhYXFxcYGBgZGRkaGhobGxscHBwdHR0eHh4fHx8gICAhISEiIiIjIyMkJCQlJSUmJiYnJycoKCgpKSkqKiorKyssLCwtLS0uLi4vLy8wMDAxMTEyMjIzMzM0NDQ1NTU2NjY3Nzc4ODg5OTk6Ojo7Ozs8PDw9PT0+Pj4/Pz9AQEBBQUFCQkJDQ0NERERFRUVGRkZHR0dISEhJSUlKSkpLS0tMTExNTU1OTk5PT09QUFBRUVFSUlJTU1NUVFRVVVVWVlZXV1dYWFhaWlpbW1tcXFxdXV1eXl5fX19gYGBhYWFiYmJjY2NkZGRlZWVmZmZnZ2doaGhpaWlqampra2tsbGxtbW1ubm5vb29wcHBxcXFycnJzc3N0dHR1dXV2dnZ3d3d4eHh5eXl6enp7e3t8fHx9fX1+fn5/f3+AgICBgYGDg4OEhISFhYWGhoaHh4eIiIiJiYmKioqLi4uMjIyNjY2Ojo6Pj4+QkJCRkZGSkpKTk5OUlJSVlZWWlpaXl5eYmJiZmZmampqbm5ucnJydnZ2enp6fn5+goKChoaGioqKjo6OkpKSlpaWnp6eoqKipqamqqqqrq6usrKytra2urq6vr6+wsLCxsbGysrKzs7O0tLS1tbW2tra3t7e4uLi5ubm7u7u8vLy9vb2+vr6/v7/AwMDBwcHCwsLDw8PExMTFxcXGxsbHx8fIyMjJycnKysrLy8vMzMzNzc3Ozs7Pz8/Q0NDR0dHS0tLT09PU1NTV1dXW1tbX19fY2NjZ2dna2trb29vc3Nzd3d3e3t7f39/g4ODh4eHi4uLj4+Pk5OTl5eXm5ubn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///9Ea/UPAAAACXBIWXMAAA7DAAAOwwHHb6hkAAASZUlEQVR4nO2de3wVxdnHnz2XJOckJzmERBISQCUBpBTkDipQQAG5qgUNrbyWyjUEqkVLW95GaEssVUmEgsSk1gQQDPVF6cULXvBFLLwir7VBuVMQKsitgOH2/PPOzO45OZfZM2c9J282Z+f3+TCZnduZ/bIzs7M78yygVERBc1fA7JKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABJKABDIfoBP3enttDfPyE1yd365tRdNWx3yARj9wYJnnXKiXn6Bk4Kd1zveatDqmA3TQfhyx53MhXn6CC2mfIC55qUnrYzpAmwuIU1wS4uUneCMPrzd1fUwH6Pn+xCm9P8TLT7Cmx2xv1oJrTVof0wGqHECc0vtCvPwEK+DnZ3blPNuk9TEdoE2diFNSHOLlJ1jbhjiPjGzS+pgO0CHHScR+q0O8/AQ7M68iLrq3SetjOkA4cvr5Wu8ZrNvp9+onGDj3+NvZLzdpdcwH6NR4b58PEAsW+L36CY6PzShc1bTVMR8gk0kCEkgCEkgCEkgCEkgCEkgCEkgCEkgCEkgCEsi0gC4/7Pce/IXf+0613/v7LX5v6QG/d1pDnOthWkBn0/3erbf7vStn+r2zV/i9g971e72n41wPCUggCUggCUggCUggCUggCUigeAGa1zs29V0bXF5tT8XtU4rN701yUNdhd7vttiR/qD3F71V6aAXOj9OJxQtQvz/siElzFgSXt2DOyhqfXqzwe6to6BQYWlMzFkb7Qyte9HtXauVVdliv6n9jPLG4AdoeW/4loYCW6Kdtr1DXlh2pvArHJFVPx1avFgkox0ZdR0ak8qpTY6uPXy0RUAmsR3wbQl/aB8nSgNANycmQFLE8awPCe1zJIyKXxwV07rmS++8rXn3WSMVaJiCxeIC2enoWl5aW9PMaqauVAPUqV/++2NdAQVYClHFQ/XuulYGCrARoQtFx+ufktAkGCrISoBOj7QX9B3RyjDxloCArAUI8uPn5yk2HDBVkLUDfQIkK6PmU11XtCY/buSA8TFeJCugZ+52qFofH1RUYKChRAckmJhAP0PWqcRP+RP4eG2ugICsBWpy1cHb6y4h7jZy0lQC124L4Zmq9BETFA+T9J3HmD79mJUDbZz1Q9m9eBA/QXTMuI1685dF66wCqzV+27qEuYVvukA9ob76nCvHz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" width="80%" /></p>
+</div>
+<div id="a-second-example" class="section level2">
+<h2>A Second Example</h2>
+<p>Consider the following stochastic volatility <span class="citation">(Taylor 1982)</span>, which is a model that is simpler than the one explored in <span class="citation">(Deligiannidis, Doucet, and Pitt 2015)</span>. It assumes a latent AR(1) process. It also assumes that, after conditioning on contemporaneous values of the latent process, that the observed returns are normal.</p>
+<p>In other words, let <span class="math inline">\(Z_1, \ldots, Z_N\)</span> and <span class="math inline">\(W_1, \ldots, W_N\)</span> be iid standard normal random variables, and for <span class="math inline">\(t &gt; 1\)</span>, define the latent process as</p>
+<p><span class="math display">\[
+X_t = \phi X_{t-1} + \sigma Z_t,
+\]</span> and <span class="math inline">\(X_1 \sim \text{Normal}(0, \sigma^2/(1-\phi^2))\)</span>. The distribution of the observed returns is defined by <span class="math display">\[
+Y_t = \beta  \exp(X_t/2) W_t
+\]</span> for <span class="math inline">\(t = 1, \ldots, N\)</span>. The collection of all unknown parameters is <span class="math inline">\(\theta = \phi, \beta, \sigma^2\)</span>.</p>
+<p><span class="math inline">\(Y_{1:N} \mid X_{1:N}, \theta\)</span> has the same factorization as equation (1), but unlike equation (2), we have the following Markovian factorization for the distribution of all latent variables:</p>
+<p><span class="math display">\[
+\begin{eqnarray} 
+p(x_{1:N} \mid \theta) = p(x_1) \prod_{t=2}^N p( x_{t} \mid x_{t-1}, \theta) \tag{3}.
+\end{eqnarray}
+\]</span> Assume that all three parameters are independent a priori: <span class="math inline">\(\pi(\phi)\pi(\beta)\pi(\sigma^2)\)</span>, and select a uniform, Gaussian, and Inverse-Gamma distribution for these three distributions, respectively. For the proposal distribution, we use a multivariate normal in a transformed parameter space. <span class="math inline">\(\phi\)</span> is transformed with <span class="math inline">\(\text{logit}((\phi+1)/2)\)</span>, <span class="math inline">\(\beta\)</span> is transformed with the identity map, and <span class="math inline">\(\sigma^2\)</span> is transformed with the natural logarithm.</p>
+<p>The primary bottleneck in the previous example was the function passed in to the <code>logLikeApproxEval=</code> input of <code>makeCPMSampler()</code>. It was written entirely in R, and so, as a result, was not as fast as it could have been. In this example, we provide a compiled function for this input that makes use of C++ code taken from the PF C++ library <span class="citation">(Brown 2020)</span>. A growing collection of examples of calling PF code from R is provided as an R package called <code>pfexamplesinr</code> that is hosted on Github. Interfacing to c++ from R was facilitated by the RcppEigen package <span class="citation">(Bates and Eddelbuettel 2013)</span>.</p>
+<p>The particle filter used to compute the approximate log-likelihood is described in <span class="citation">(Deligiannidis, Doucet, and Pitt 2015)</span>. Like the example above, it calculates the approximation using common random normal variables generated from within <code>makeCPMSampler()</code>. As detailed in <span class="citation">(Deligiannidis, Doucet, and Pitt 2015)</span>, the particle filter that calculates this number uses a resampling technique that makes of the pseudo-inverse of a Hilbert space-filling function. This function was implemented with C++ code lightly edited from the C code provided in <span class="citation">(Skilling 2004)</span>.</p>
+<p>Since version 1.0.1, this package provides an extra input to <code>makeCPMSampler()</code> called <code>nansInLLFatal=</code>. If set to <code>FALSE</code>, then whenever <code>NaN</code> is returned from the approximate log-likelihood function, the parameter proposal is disregarded. Alternatively, if it is set to <code>TRUE</code>, then the entire chain comes to a halt, and all the samples obtained up until that iteration are disregarded. When using particle filters to produce approximations to the likelihood, I recommend setting this to <code>FALSE</code>, especially when the proposal distribution has a high amount of dispersion. This is because, despite one’s best efforts to guard against it, particle filters can frequently generate <code>NaN</code>s.</p>
+<p>Please also note that the number of particles used in this particle filter is selected in two places. One place is the code below, and another in a c++ <code>#define</code> directive in the file <code>src/likelihoods.cpp</code> in the <code>pfexamples</code> library. If you are interested in increasing or decreasing the number of particles, fork <code>pfexamplesinr</code>, edit your copy of the files, and run the following example after replacing the appropriate line with <code>devtools::install_github(&quot;&lt;your Github username&gt;/pfexamplesinr&quot;)</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cPseudoMaRg)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;tbrown122387/pfexamplesinr@e4e2a80&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pfexamplesinr)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>returnsData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/return_data.csv&quot;</span>, <span class="at">header=</span>F)[,<span class="dv">1</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>numParticles <span class="ot">&lt;-</span> <span class="dv">500</span> <span class="co"># THIS MUST MATCH &quot;#define NP 500&quot; in src/likelihoods.cpp</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>numMCMCIters <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>randomWalkScale <span class="ot">&lt;-</span> .<span class="dv">1</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>recordEveryTh <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>numUs <span class="ot">&lt;-</span> <span class="fu">length</span>(returnsData)<span class="sc">*</span>(numParticles<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># some helper functions</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>transformParams <span class="ot">&lt;-</span> <span class="cf">function</span>(untrans){</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">&quot;numeric&quot;</span>, <span class="at">length =</span> <span class="dv">3</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">1</span>] <span class="ot">&lt;-</span> boot<span class="sc">::</span><span class="fu">logit</span>(.<span class="dv">5</span><span class="sc">*</span>(untrans[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">1</span>))</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">2</span>] <span class="ot">&lt;-</span> untrans[<span class="dv">2</span>]</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">log</span>(untrans[<span class="dv">3</span>])</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>revTransformParams <span class="ot">&lt;-</span> <span class="cf">function</span>(trans){</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">&quot;numeric&quot;</span>, <span class="at">length =</span> <span class="dv">3</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>boot<span class="sc">::</span><span class="fu">inv.logit</span>( trans[<span class="dv">1</span>] )<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">2</span>] <span class="ot">&lt;-</span> trans[<span class="dv">2</span>]</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">exp</span>(trans[<span class="dv">3</span>])</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>sampler <span class="ot">&lt;-</span> <span class="fu">makeCPMSampler</span>(</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">paramKernSamp =</span> <span class="cf">function</span>(params){</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">revTransformParams</span>(<span class="fu">transformParams</span>(params) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">3</span>)<span class="sc">*</span>randomWalkScale)</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">logParamKernEval =</span> <span class="cf">function</span>(oldTheta, newTheta){</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    unconstrainedNew <span class="ot">&lt;-</span> <span class="fu">transformParams</span>(newTheta)</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    unconstrainedOld <span class="ot">&lt;-</span> <span class="fu">transformParams</span>(oldTheta)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dnorm</span>(unconstrainedNew[<span class="dv">1</span>], unconstrainedOld[<span class="dv">1</span>], <span class="at">sd =</span> randomWalkScale, <span class="at">log =</span> <span class="cn">TRUE</span>) <span class="co">#phi</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="sc">+</span> <span class="fl">0.6931472</span> <span class="sc">+</span> unconstrainedNew[<span class="dv">1</span>] <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">log</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(unconstrainedNew[<span class="dv">1</span>])) <span class="co"># phi jacobian</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    <span class="sc">+</span> <span class="fu">dnorm</span>(unconstrainedNew[<span class="dv">2</span>], unconstrainedOld[<span class="dv">2</span>], <span class="at">sd =</span> randomWalkScale, <span class="at">log =</span> <span class="cn">TRUE</span>) <span class="co">#beta</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    <span class="sc">+</span> <span class="fu">dnorm</span>(unconstrainedNew[<span class="dv">3</span>], unconstrainedOld[<span class="dv">3</span>], <span class="at">sd =</span> randomWalkScale, <span class="at">log =</span> <span class="cn">TRUE</span>) <span class="co">#sigmaSquared</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span> unconstrainedNew[<span class="dv">3</span>] <span class="co"># jacobian</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">logPriorEval =</span> <span class="cf">function</span>(theta){</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>( (<span class="fu">abs</span>(theta[<span class="dv">1</span>]) <span class="sc">&gt;=</span> <span class="fl">1.0</span>) <span class="sc">||</span> theta[<span class="dv">3</span>] <span class="sc">&lt;=</span> <span class="fl">0.0</span> ){</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>       <span class="fu">log</span>(.<span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        <span class="fu">dnorm</span>(theta[<span class="dv">2</span>], <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">10</span>, <span class="at">log =</span> T) <span class="sc">+</span> </span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>        <span class="fu">dgamma</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">/</span>theta[<span class="dv">3</span>], <span class="at">shape =</span> <span class="fl">1.3</span>, <span class="at">rate =</span> .<span class="dv">3</span>, <span class="at">log =</span> T)</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">logLikeApproxEval =</span> svolApproxLL, <span class="co"># c++ function from pfexamplesinr</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>  returnsData, numUs, numMCMCIters, .<span class="dv">99</span>, recordEveryTh, <span class="cn">FALSE</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>svolSampleResults <span class="ot">&lt;-</span> <span class="fu">sampler</span>( <span class="fu">c</span>(.<span class="dv">9</span>, <span class="dv">1</span>, .<span class="dv">1</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(svolSampleResults)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(svolSampleResults)</span></code></pre></div>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-pseudomarginal" class="csl-entry">
+Andrieu, Christophe, and Gareth O. Roberts. 2009. <span>“The Pseudo-Marginal Approach for Efficient Monte Carlo Computations.”</span> <em>The Annals of Statistics</em> 37 (2): 697–725. <a href="http://www.jstor.org/stable/30243645">http://www.jstor.org/stable/30243645</a>.
+</div>
+<div id="ref-rcppeigen" class="csl-entry">
+Bates, Douglas, and Dirk Eddelbuettel. 2013. <span>“Fast and Elegant Numerical Linear Algebra Using the <span>RcppEigen</span> Package.”</span> <em>Journal of Statistical Software</em> 52 (5): 1–24. <a href="https://www.jstatsoft.org/v52/i05/">https://www.jstatsoft.org/v52/i05/</a>.
+</div>
+<div id="ref-Brown2020" class="csl-entry">
+Brown, Taylor R. 2020. <span>“A Short Introduction to PF: A c++ Library for Particle Filtering.”</span> <em>Journal of Open Source Software</em> 5 (54): 2599. <a href="https://doi.org/10.21105/joss.02599">https://doi.org/10.21105/joss.02599</a>.
+</div>
+<div id="ref-cpm" class="csl-entry">
+Deligiannidis, George, Arnaud Doucet, and Michael K. Pitt. 2015. <span>“The Correlated Pseudo-Marginal Method.”</span>
+</div>
+<div id="ref-hilbert" class="csl-entry">
+Skilling, John. 2004. <span>“<span class="nocase">Programming the Hilbert curve</span>.”</span> In <em>Bayesian Inference and Maximum Entropy Methods in Science and Engineering</em>, edited by Gary J. Erickson and Yuxiang Zhai, 707:381–87. American Institute of Physics Conference Series. <a href="https://doi.org/10.1063/1.1751381">https://doi.org/10.1063/1.1751381</a>.
+</div>
+<div id="ref-taylor_svol" class="csl-entry">
+Taylor, S. J. 1982. <span>“Financial Returns Modelled by the Product of Two Stochastic Processes-a Study of the Daily Sugar Prices 1961-75.”</span> <em>Time Series Analysis : Theory and Practice</em> 1: 203–26. <a href="https://ci.nii.ac.jp/naid/10018822959/en/">https://ci.nii.ac.jp/naid/10018822959/en/</a>.
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
